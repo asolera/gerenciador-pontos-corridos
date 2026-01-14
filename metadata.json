@@ -1,0 +1,5 @@
+{
+  "name": "Gerenciador de Pontos Corridos",
+  "description": "Uma ferramenta SPA para gerenciar campeonatos de pontos corridos, com geração automática de tabelas, classificação em tempo real e persistência local.",
+  "requestFramePermissions": []
+}
