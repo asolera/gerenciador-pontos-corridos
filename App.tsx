@@ -53,11 +53,11 @@ const App: React.FC = () => {
 
   const handleDeleteProject = (id: string) => {
     if (window.confirm('Tem certeza que deseja excluir este projeto?')) {
-        // If we are deleting the currently selected project, deselect it first
-        if (currentProjectId === id) {
-            setCurrentProjectId(null);
-        }
-        setProjects(prev => prev.filter(p => p.id !== id));
+      // If we are deleting the currently selected project, deselect it first
+      if (currentProjectId === id) {
+        setCurrentProjectId(null);
+      }
+      setProjects(prev => prev.filter(p => p.id !== id));
     }
   };
 
@@ -85,7 +85,7 @@ const App: React.FC = () => {
 
   const handleSaveConfiguration = (projectId: string, doubleRound: boolean, relegationCount: number, teams: Team[]) => {
     const rounds = generateSchedule(teams, doubleRound);
-    
+
     setProjects(prev => prev.map(p => {
       if (p.id === projectId) {
         return {
@@ -127,7 +127,7 @@ const App: React.FC = () => {
 
   return (
     <div className="flex h-screen w-full overflow-hidden">
-      <SidebarLeft 
+      <SidebarLeft
         isOpen={leftSidebarOpen}
         toggleSidebar={() => setLeftSidebarOpen(!leftSidebarOpen)}
         projects={projects}
@@ -142,18 +142,18 @@ const App: React.FC = () => {
       <main className="flex-1 flex flex-col md:flex-row overflow-hidden relative">
         {currentProject ? (
           currentProject.isConfigured ? (
-             <>
-               <StandingsTable project={currentProject} />
-               <SidebarRight project={currentProject} onUpdateMatch={handleUpdateMatch} />
-             </>
+            <>
+              <StandingsTable project={currentProject} />
+              <SidebarRight project={currentProject} onUpdateMatch={handleUpdateMatch} />
+            </>
           ) : (
-             <ConfigurationPanel project={currentProject} onSaveConfiguration={handleSaveConfiguration} />
+            <ConfigurationPanel project={currentProject} onSaveConfiguration={handleSaveConfiguration} />
           )
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center bg-slate-50 text-slate-400">
-             <div className="text-6xl mb-4">⚽</div>
-             <h2 className="text-xl font-semibold">Selecione ou crie um projeto</h2>
-             <p className="text-sm">Utilize o menu lateral para começar.</p>
+            <div className="text-7xl mb-4">⚽</div>
+            <h2 className="text-2xl font-semibold">Selecione ou crie um projeto</h2>
+            <p className="text-base">Utilize o menu lateral para começar.</p>
           </div>
         )}
       </main>

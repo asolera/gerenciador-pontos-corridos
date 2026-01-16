@@ -68,7 +68,7 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
     <div className={`flex flex-col bg-slate-900 text-white transition-all duration-300 h-screen ${isOpen ? 'w-80' : 'w-16'} border-r border-slate-700`}>
       {/* Header */}
       <div className="p-4 flex items-center justify-between border-b border-slate-800 h-16">
-        {isOpen && <h1 className="font-bold text-lg truncate">Pontos Corridos</h1>}
+        {isOpen && <h1 className="font-bold text-xl truncate">Pontos Corridos</h1>}
         <button onClick={toggleSidebar} className="p-1 hover:bg-slate-700 rounded transition-colors">
           {isOpen ? <ChevronLeft size={20} /> : <Menu size={20} />}
         </button>
@@ -80,11 +80,11 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
           <>
             {/* Project Selection */}
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold text-slate-400 uppercase">Projeto Atual</label>
-              <select 
-                value={currentProjectId || ''} 
+              <label className="text-sm font-semibold text-slate-400 uppercase">Projeto Atual</label>
+              <select
+                value={currentProjectId || ''}
                 onChange={(e) => onSelectProject(e.target.value)}
-                className="bg-white text-slate-900 border border-slate-300 rounded p-2 text-sm focus:outline-none focus:border-brand-500"
+                className="bg-white text-slate-900 border border-slate-300 rounded p-2 text-base focus:outline-none focus:border-brand-500"
               >
                 <option value="" disabled>Selecione um projeto</option>
                 {projects.map(p => (
@@ -95,43 +95,43 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
 
             {/* Actions */}
             <div className="flex gap-2">
-               <button 
+              <button
+                type="button"
+                onClick={() => setIsCreating(!isCreating)}
+                className="flex-1 flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 text-white py-2 px-3 rounded text-base font-medium transition-colors"
+              >
+                <FolderPlus size={16} /> Novo
+              </button>
+              {selectedProject && (
+                <button
                   type="button"
-                  onClick={() => setIsCreating(!isCreating)}
-                  className="flex-1 flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 text-white py-2 px-3 rounded text-sm font-medium transition-colors"
-               >
-                 <FolderPlus size={16} /> Novo
-               </button>
-               {selectedProject && (
-                 <button 
-                    type="button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      onDeleteProject(selectedProject.id);
-                    }}
-                    className="flex-shrink-0 flex items-center justify-center gap-2 bg-red-100 text-red-700 hover:bg-red-600 hover:text-white py-2 px-3 rounded text-sm font-medium transition-colors"
-                    title="Excluir projeto atual"
-                 >
-                   <Trash2 size={16} />
-                 </button>
-               )}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    onDeleteProject(selectedProject.id);
+                  }}
+                  className="flex-shrink-0 flex items-center justify-center gap-2 bg-red-100 text-red-700 hover:bg-red-600 hover:text-white py-2 px-3 rounded text-base font-medium transition-colors"
+                  title="Excluir projeto atual"
+                >
+                  <Trash2 size={16} />
+                </button>
+              )}
             </div>
 
             {/* Create Form */}
             {isCreating && (
               <form onSubmit={handleCreateSubmit} className="bg-slate-800 p-3 rounded border border-slate-700 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2">
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   autoFocus
                   placeholder="Nome do Campeonato"
                   value={newProjectName}
                   onChange={(e) => setNewProjectName(e.target.value)}
-                  className="bg-white text-slate-900 border border-slate-300 rounded px-2 py-1 text-sm focus:outline-none focus:border-brand-500"
+                  className="bg-white text-slate-900 border border-slate-300 rounded px-2 py-1 text-base focus:outline-none focus:border-brand-500"
                 />
                 <div className="flex justify-end gap-2">
-                  <button type="button" onClick={() => setIsCreating(false)} className="text-xs text-slate-400 hover:text-white">Cancelar</button>
-                  <button type="submit" disabled={!newProjectName.trim()} className="text-xs bg-brand-600 px-2 py-1 rounded text-white disabled:opacity-50">Criar</button>
+                  <button type="button" onClick={() => setIsCreating(false)} className="text-sm text-slate-400 hover:text-white">Cancelar</button>
+                  <button type="submit" disabled={!newProjectName.trim()} className="text-sm bg-brand-600 px-2 py-1 rounded text-white disabled:opacity-50">Criar</button>
                 </div>
               </form>
             )}
@@ -140,54 +140,54 @@ const SidebarLeft: React.FC<SidebarLeftProps> = ({
 
             {/* Import/Export */}
             <div className="flex flex-col gap-2">
-              <label className="text-xs font-semibold text-slate-400 uppercase">Dados</label>
-              
-              <button 
+              <label className="text-sm font-semibold text-slate-400 uppercase">Dados</label>
+
+              <button
                 type="button"
                 onClick={() => selectedProject && onExportProject(selectedProject)}
                 disabled={!selectedProject}
-                className="flex items-center gap-3 p-2 rounded hover:bg-slate-800 text-sm text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="flex items-center gap-3 p-2 rounded hover:bg-slate-800 text-base text-slate-300 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 <Download size={18} /> Exportar Projeto
               </button>
-              
-              <button 
+
+              <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex items-center gap-3 p-2 rounded hover:bg-slate-800 text-sm text-slate-300 transition-colors"
+                className="flex items-center gap-3 p-2 rounded hover:bg-slate-800 text-base text-slate-300 transition-colors"
               >
                 <Upload size={18} /> Importar Projeto
               </button>
-              <input 
-                type="file" 
-                ref={fileInputRef} 
-                onChange={handleFileChange} 
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleFileChange}
                 accept=".json"
-                className="hidden" 
+                className="hidden"
               />
             </div>
           </>
         ) : (
           /* Collapsed View Icons */
           <div className="flex flex-col items-center gap-4 mt-2">
-             <button onClick={() => toggleSidebar()} title="Projetos" className="p-2 bg-slate-800 rounded-full hover:bg-brand-600 transition-colors">
-               <FolderPlus size={20} />
-             </button>
-             {selectedProject && (
-               <button onClick={() => onExportProject(selectedProject)} title="Exportar" className="p-2 hover:text-brand-400 transition-colors">
-                 <Download size={20} />
-               </button>
-             )}
-             <button onClick={() => fileInputRef.current?.click()} title="Importar" className="p-2 hover:text-brand-400 transition-colors">
-                <Upload size={20} />
-             </button>
+            <button onClick={() => toggleSidebar()} title="Projetos" className="p-2 bg-slate-800 rounded-full hover:bg-brand-600 transition-colors">
+              <FolderPlus size={20} />
+            </button>
+            {selectedProject && (
+              <button onClick={() => onExportProject(selectedProject)} title="Exportar" className="p-2 hover:text-brand-400 transition-colors">
+                <Download size={20} />
+              </button>
+            )}
+            <button onClick={() => fileInputRef.current?.click()} title="Importar" className="p-2 hover:text-brand-400 transition-colors">
+              <Upload size={20} />
+            </button>
           </div>
         )}
       </div>
 
       {isOpen && selectedProject && (
-        <div className="p-4 text-xs text-slate-500 border-t border-slate-800">
-           ID: {selectedProject.id.slice(0, 8)}...
+        <div className="p-4 text-sm text-slate-500 border-t border-slate-800">
+          ID: {selectedProject.id.slice(0, 8)}...
         </div>
       )}
     </div>
